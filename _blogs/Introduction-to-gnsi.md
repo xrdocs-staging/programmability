@@ -8,12 +8,11 @@ author: Rahul Sharma
 
 # Introduction
 
-<p align="justify">This blog focuses on gNSI, which is a gRPC based security framework that manages AAA on a network device. AAA refers to:
+<p align="justify">This blog focuses on gNSI, which is a gRPC based security framework that manages AAA on a network device. AAA refers to:</p>
 <br>
-  <b>Authentication:</b> Getting access to the system.<br>
-  <b>Authorization:</b> Assigning authenticated user/group privileges.<br>
-  <b>Accounting:</b> Logging events,actions, or data.<br>
-</p> 
+  		<b>Authentication:</b> Getting access to the system.<br>
+  		<b>Authorization:</b> Assigning authenticated user/group privileges.<br>
+  		<b>Accounting:</b> Logging events,actions, or data.<br>
 
 It is important to note the order of AAA. 
   
@@ -28,13 +27,13 @@ gNSI offers authorization through two protocols, each operating at different lev
 <p align="justify">The gRPC suite encompasses several services like gNMI, gNOI, gNSI, each containing numerous RPCs such as Get(), Set(), Rotate(), etc. With authz, network devices can be configured to regulate user access to specific RPCs within these services.</p>
 
 For example- 
-
+```
 Rahul, gRPC = gNMI, rpc = Get() --> Allow
 Eric, gRPC = gNMI, rpc = Subscribe() --> Allow
 Cisco, gRPC = all, rpc = all --> Allow
 Mike, gRPC = gNOI, rpc = Verify() --> Deny
-
-<p align="justify">To implement user access control at the RPC level, a policy known as the service authorization policy must be defined. Following is a sample policy that implements authorization rules as per the example above.</p> 
+```
+<p align="justify">To implement user access control at the RPC level, a policy known as the 'Service Authorization Policy' must be defined. Following is a sample policy that implements authorization rules as per the example above.</p> 
 ```
 {
     "name": "Manage RPC level access for users Rahul, Eric, cisco and Mike",
@@ -99,13 +98,11 @@ Mike, gRPC = gNOI, rpc = Verify() --> Deny
  
 <p align="justify"> The gNSI.authz protocol comprises of three RPCs designed to manage authorization: </p>
 		
-1. The <b>Rotate()</b> RPC changes the policy on the device,with each policy dentified by its 'Version' and 'Timestamp'.<br>
+1. The <b>Rotate()</b> RPC changes the policy on the device, with each policy dentified by its 'version' and 'timestamp'.<br>
 		
 2. The <b>Probe()</b> RPC verifies the current or candidate policy against user authorizations. <br>
 
-		
 3. The <b>Get()</b> RPC return the current instance of the authz policy.<br>
-
  
 <p align="justify">Authz is supported from XR 7.11.1 onwards. There are two ways to leverage authz:</p>
 
@@ -197,7 +194,17 @@ Mon Apr 15 20:46:13.332 UTC
 {
     "version": "1.0",
     "created_on": 1713213968,
-    "policy": "{\"name\":\"Manage RPC level access for users Rahul, Eric, cisco and Mike\",\"allow_rules\":[{\"name\":\"Allow user Rahul to access Get() RPC from gNMI service\",\"request\":{\"paths\":[\"\/gnmi.gNMI\/Get\"]},\"source\":{\"principals\":[\"Rahul\"]}},{\"name\":\"Allow user Eric to access Subscribe() RPC from gNMI service\",\"request\":{\"paths\":[\"\/gnmi.gNMI\/Subscribe\"]},\"source\":{\"principals\":[\"Eric\"]}},{\"name\":\"Allow user cisco access to all RPCs\",\"request\":{\"paths\":[\"*\"]},\"source\":{\"principals\":[\"cisco\"]}}],\"deny_rules\":[{\"name\":\"Deny user Mike to access Verify() RPC from gNOI service\",\"request\":{\"paths\":[\"\/gnoi.os.OS\/Verify\"]},\"source\":{\"principals\":[\"Mike\"]}}]}"
+    "policy": "{\"name\":\"Manage RPC level access for users Rahul, Eric,
+    cisco and Mike\",\"allow_rules\":[{\"name\":\"Allow user Rahul to 
+    access Get() RPC from gNMI service\",\"request\":{\"paths\":
+    [\"\/gnmi.gNMI\/Get\"]},\"source\":{\"principals\":[\"Rahul\"]}},
+    {\"name\":\"Allow user Eric to access Subscribe() RPC from gNMI 
+    service\",\"request\":{\"paths[\"\/gnmi.gNMI\/Subscribe\"]},\"source\":
+    {\"principals\":[\"Eric\"]}},{\"name\":\"Allow user cisco access to all
+    RPCs\",\"request\":{\"paths\":[\"*\"]},\"source\":{\"principals\":
+    [\"cisco\"]}}],\"deny_rules\":[{\"name\":\"Deny user Mike to access
+    Verify() RPC from gNOI service\",\"request\":{\"paths\":
+    [\"\/gnoi.os.OS\/Verify\"]},\"source\":{\"principals\":[\"Mike\"]}}]}"
 }
 ```
 
@@ -205,10 +212,10 @@ Mon Apr 15 20:46:13.332 UTC
 
 ```
 ➜  authz git:(main) ✗ gnmic -a 172.20.163.79:57400 -u Rahul -p Rahul123! --insecure capabilities --encoding json_ietf
-		target "172.20.163.79:57400", capabilities request failed: "172.20.163.79:57400" CapabilitiesRequest failed: rpc error: code = PermissionDenied desc = unauthorized RPC request rejected
-		Error: one or more requests failed
+target "172.20.163.79:57400", capabilities request failed: "172.20.163.79:57400" CapabilitiesRequest failed: rpc error: code = <mark>PermissionDenied desc = unauthorized RPC request rejected </mark>
+Error: one or more requests failed
 		
-		➜  authz git:(main) ✗ gnmic -a 172.20.163.79:57400 -u Rahul -p Rahul123! --insecure get --path 'Cisco-IOS-XR-shellutil-oper:system-time/clock' --encoding json_ietf
+➜  authz git:(main) ✗ gnmic -a 172.20.163.79:57400 -u Rahul -p Rahul123! --insecure get --path 'Cisco-IOS-XR-shellutil-oper:system-time/clock' --encoding json_ietf
 
 [
   {
@@ -241,9 +248,11 @@ Mon Apr 15 20:46:13.332 UTC
 
 <b> 2. gRPCurl </b>
 
-<p align="justify">grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click here.</p>
+<p align="justify">grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click 
+> [here](https://github.com/fullstorydev/grpcurl).</p>
   
 Following are the steps to use this to interact with gRPC server on the router.
+<br>
 <br>
 <u>Step 1:</u> Clone the OpenConfig gNSI repository: 
 ```
