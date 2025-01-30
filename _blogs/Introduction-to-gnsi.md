@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 date: '2024-03-05 13:13 -0500'
 title: AAA using gNSI on IOX-XR
 position: hidden
@@ -182,31 +182,3 @@ Step 4: Test the policy using several clients such as gNMIc etc.
 ]
 ```
 This is an expected behavior, as the user Rahul is only authorized for the RPC Get(). Similar tests can be conducted for other users.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
