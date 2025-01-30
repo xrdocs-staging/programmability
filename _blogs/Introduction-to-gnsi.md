@@ -9,18 +9,18 @@ author: Rahul Sharma
 # Introduction
 
 <p align="justify">This blog focuses on gNSI, which is a gRPC based security framework that manages AAA on a network device. AAA refers to:</p>
-<br>
-  		<b>Authentication:</b> Getting access to the system.<br>
-  		<b>Authorization:</b> Assigning authenticated user/group privileges.<br>
-  		<b>Accounting:</b> Logging events,actions, or data.<br>
+
+ 1. <b>Authentication:</b> Getting access to the system.<br>
+ 2. <b>Authorization:</b> Assigning authenticated user/group privileges.<br>
+ 3. ><b>Accounting:</b> Logging events,actions, or data.
 
 It is important to note the order of AAA. 
   
 # Authorization
 	
 gNSI offers authorization through two protocols, each operating at different levels:<br>
-	1. gRPC based <b>service level</b> using <b>authz</b>.<br>
-    2. <b>xpath level</b> using <b>pathz</b>. </p>
+	<p>1. gRPC based <b>service level</b> using <b>authz</b>.<br></p>
+    <p>2. <b>xpath level</b> using <b>pathz</b>. </p>
     
 ## authz
 
@@ -28,10 +28,10 @@ gNSI offers authorization through two protocols, each operating at different lev
 
 For example- 
 ```
-Rahul, gRPC = gNMI, rpc = Get() --> Allow
-Eric, gRPC = gNMI, rpc = Subscribe() --> Allow
-Cisco, gRPC = all, rpc = all --> Allow
-Mike, gRPC = gNOI, rpc = Verify() --> Deny
+User Rahul, gRPC = gNMI, rpc = Get() --> Allow
+User Eric, gRPC = gNMI, rpc = Subscribe() --> Allow
+User Cisco, gRPC = all, rpc = all --> Allow
+User Mike, gRPC = gNOI, rpc = Verify() --> Deny
 ```
 <p align="justify">To implement user access control at the RPC level, a policy known as the 'Service Authorization Policy' must be defined. Following is a sample policy that implements authorization rules as per the example above.</p> 
 ```
@@ -212,7 +212,7 @@ Mon Apr 15 20:46:13.332 UTC
 
 ```
 ➜  authz git:(main) ✗ gnmic -a 172.20.163.79:57400 -u Rahul -p Rahul123! --insecure capabilities --encoding json_ietf
-target "172.20.163.79:57400", capabilities request failed: "172.20.163.79:57400" CapabilitiesRequest failed: rpc error: code = <mark>PermissionDenied desc = unauthorized RPC request rejected </mark>
+target "172.20.163.79:57400", capabilities request failed: "172.20.163.79:57400" CapabilitiesRequest failed: rpc error: code = PermissionDenied desc = unauthorized RPC request rejected
 Error: one or more requests failed
 		
 ➜  authz git:(main) ✗ gnmic -a 172.20.163.79:57400 -u Rahul -p Rahul123! --insecure get --path 'Cisco-IOS-XR-shellutil-oper:system-time/clock' --encoding json_ietf
@@ -248,8 +248,8 @@ Error: one or more requests failed
 
 <b> 2. gRPCurl </b>
 
-<p align="justify">grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click 
-> [here](https://github.com/fullstorydev/grpcurl).</p>
+grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click 
+> [here](https://github.com/fullstorydev/grpcurl).
   
 Following are the steps to use this to interact with gRPC server on the router.
 <br>
@@ -265,7 +265,7 @@ here:https://github.com/fullstorydev/grpcurl. Here, we have used brew to install
 brew install grpcurl
 ```
 
-<u>Step 3.</u>  Change working directory to gnsi/authz.
+<u>Step 3.</u>  Change the working directory to gnsi/authz.
 ```			
 cd gnsi/authz
 ```
