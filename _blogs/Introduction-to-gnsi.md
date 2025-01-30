@@ -182,3 +182,225 @@ Step 4: Test the policy using several clients such as gNMIc etc.
 ]
 ```
 This is an expected behavior, as the user Rahul is only authorized for the RPC Get(). Similar tests can be conducted for other users.
+
+<b> 2. gRPCurl </b>
+
+<p align="justify">grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click here.</p>
+  
+Following are the steps to use this to interact with gRPC server on the router.
+<br>
+<u>Step 1:</u> Clone the OpenConfig gNSI repository: 
+```
+git clone https://github.com/openconfig/gnsi.git
+```
+<p align="justify"><u>Step 2.</u>  Install grpcurl using one of the method mentioned 
+here:https://github.com/fullstorydev/grpcurl. Here, we have used brew to install grpcurl using the following command:</p>
+
+```
+brew install grpcurl
+```
+
+<u>Step 3.</u>  Change working directory to gnsi/authz.
+```			
+cd gnsi/authz
+```
+	
+<u>Step 4.</u> Use gNSI.authz RPCs to manage authorization on the router.
+
+A. Rotate() RPC - This RPC creates a new policy, or changes the existing policy. Following is the command to create a policy same as mentioned above.
+
+```
+➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{
+"uploadRequest":
+    {
+        "version": "Creating policy through grpcurl",
+        "created_on": 171321154967868,
+        "policy": "{\"name\":\"Manage RPC level access for users Rahul, Eric, cisco and 
+        Mike\",\"allow_rules\":[{\"name\":\"Allow user Rahul to access Get() RPC from gNMI 
+        service\",\"request\":{\"paths\":[\"\/gnmi.gNMI\/Get\”]},\”source\":{\"principals\":
+        [\"Rahul\"]}},{\"name\":\"Allow user Eric to access Subscribe() RPC from gNMI 
+        service\",\"request\":{\"paths\":[\"\/gnmi.gNMI\/Subscribe\"]},\"source\":{\"principals\":
+        [\"Eric\"]}},{\"name\":\"Allow user cisco access to all RPCs\",\"request\":{\"paths\":
+        [\"*\"]},\"source\":{\"principals\":[\"cisco\"]}}],\"deny_rules\":[{\"name\":\"Deny user 
+        Mike to access Verify() RPC from gNOI service\",\"request\":{\"paths\":
+        [\"\/gnoi.os.OS\/Verify\"]},\"source\":{\"principals\":[\"Mike\"]}}]}"
+    },
+    "force_overwrite": true
+    }{"finalize_rotation":{}}' -import-path ../authz -proto authz.proto  -H username:cisco -H
+password:cisco123! 172.20.163.79:57400 gnsi.authz.v1.Authz.Rotate
+
+Resolved method descriptor:
+// Rotate will replace an existing gRPC-level Authorization Policy on the
+// target.
+//
+// If the stream is broken or any of the steps fail the
+// target must rollback to the original state, i.e. revert any changes to
+// the gRPC-level Authorization Policy made during this RPC.
+//
+// Note that only one such RPC can be in progress. An attempt to call this
+// RPC while another is already in progress will be rejected with the
+// `UNAVAILABLE` gRPC error.
+//
+// The following describes the sequence of messages that must be exchanged
+// in the Rotate() RPC.
+//
+// Sequence of expected messages:
+//   Step 1: Start the stream
+//     Client ----> Rotate() RPC stream begin ------> Target
+//
+//   Step 2: Send gRPC-level Authorization Policy to Target.
+//     Client --> UploadRequest(authz_policy) ----> Target
+//     Client <-- UploadResponse <--- Target
+//
+//   Step 3 (optional): Test/Validation by the client.
+//     During this step client attempts to call a RPC that is allowed
+//     in the new policy and validates that the new policy "works".
+//     Additionally the client should call a RPC that is not allowed and
+//     the attempt must fail proving that the gRPC-level Authorization Policy
+//     "works".
+//     Once verified, the client then proceeds to finalize the rotation.
+//     If the new verification did not succeed the client will cancel the
+//     RPC thereby forcing the target to rollback of the new gRPC-level
+//     Authorization Policy.
+//
+//   Step 4: Final commit.
+//     Client ---> FinalizeRequest ----> Target
+//
+rpc Rotate ( stream .gnsi.authz.v1.RotateAuthzRequest ) returns ( stream .gnsi.authz.v1.RotateAuthzResponse );
+
+Request metadata to send:
+password: cisco123!
+username: cisco
+
+Response headers received:
+content-type: application/grpc
+
+Estimated response size: 0 bytes
+
+Response contents:
+{}
+
+Estimated response size: 2 bytes
+
+Response contents:
+{
+  "uploadResponse": {}
+}
+
+Response trailers received:
+(empty)
+Sent 2 requests and received 2 responses
+```
+
+B. Get() RPC - To get current policy.
+```
+➜  authz git:(main) ✗ grpcurl  -vv -plaintext -import-path ../authz -proto authz.proto  -H 
+username:cisco -H password:cisco123! 172.20.163.79:57400  gnsi.authz.v1.Authz.Get
+
+Resolved method descriptor:
+// Get returns current instance of the gRPC-level Authorization Policy
+// together with its version and created-on information.
+// If no policy has been set, Get() returns FAILED_PRECONDITION.
+rpc Get ( .gnsi.authz.v1.GetRequest ) returns ( .gnsi.authz.v1.GetResponse );
+
+Request metadata to send:
+password: cisco123!
+username: cisco
+
+Response headers received:
+content-type: application/grpc
+
+Estimated response size: 1471 bytes
+
+Response contents:
+{
+  "version": "1.0",
+  "createdOn": "1713207488",
+  "policy": "{\n    \"name\": \"Manage RPC level access for users Rahul, Eric, cisco and Mike\",\n
+  \"allow_rules\": [\n        {\n            \"name\": \"Allow user Rahul to access Get() RPC from
+  gNMI service\",\n            \"source\": {\n                \"principals\": [\n     
+  \"Rahul\"\n                ]\n            },\n            \"request\": {\n 
+  \"paths\": [\n                    \"/gnmi.gNMI/Get\"\n                ]\n            }\n  
+  },\n        {\n            \"name\": \"Allow user Eric to access Subscribe() RPC from gNMI 
+  service\",\n            \"source\": {\n                \"principals\": [\n             
+  \"Eric\"\n                ]\n            },\n            \"request\": {\n              
+  \"paths\": [\n                    \"/gnmi.gNMI/Subscribe\"\n                ]\n            }\n
+  },\n\t{\n            \"name\": \"Allow user cisco access to all RPCs\",\n            \"source\":
+  {\n                \"principals\": [\n                    \"cisco\"\n                ]\n   
+  },\n            \"request\": {\n                \"paths\": [\n                    \"*\"\n 
+  ]\n            }\n        }\n    ],\n    \"deny_rules\": [\n        {\n            \"name\": 
+  \"Deny user Mike to access Verify() RPC from gNOI service\",\n            \"source\": {\n 
+  \"principals\": [\n                    \"Mike\"\n                ]\n            },\n   
+  \"request\": {\n                \"paths\": [\n                    \"/gnoi.os.OS/Verify\"\n  
+  ]\n            }\n        }\n    ]\n}\n\n"
+}
+
+Response trailers received:
+(empty)
+Sent 0 requests and received 1 response
+```
+
+<p align="justify">C. Probe() RPC - To check if a specific user is authorized to use a particular RPC according to  the current/candidate policy. In this case, user Rahul is being probed for both, Get() and Capabilities() RPCs.</p>
+
+```
+➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{"user":"Rahul","rpc":"/gnmi.gNMI/Get"}' -
+import-path ../authz -proto authz.proto  -H username:cisco -H password:cisco123! 
+172.20.163.79:57400  gnsi.authz.v1.Authz.Probe
+
+Resolved method descriptor:
+// Probe allows for evaluation of the gRPC-level Authorization Policy engine
+// response to a gRPC call performed by a user.
+// The response is based on the instance of policy specified in the request
+// and is evaluated without actually performing the gRPC call.
+rpc Probe ( .gnsi.authz.v1.ProbeRequest ) returns ( .gnsi.authz.v1.ProbeResponse );
+
+Request metadata to send:
+password: cisco123!
+username: cisco
+
+Response headers received:
+content-type: application/grpc
+
+Estimated response size: 7 bytes
+
+Response contents:
+{
+  "action": "ACTION_PERMIT",
+  "version": "1.0"
+}
+
+Response trailers received:
+(empty)
+Sent 1 request and received 1 response 
+
+➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{"user":"Rahul","rpc":"/gnmi.gNMI/Capabilities"}' -import-path ../authz -proto authz.proto  -H 
+username:cisco -H password:cisco123! 172.20.163.79:57400  gnsi.authz.v1.Authz.Probe
+
+Resolved method descriptor:
+// Probe allows for evaluation of the gRPC-level Authorization Policy engine
+// response to a gRPC call performed by a user.
+// The response is based on the instance of policy specified in the request
+// and is evaluated without actually performing the gRPC call.
+rpc Probe ( .gnsi.authz.v1.ProbeRequest ) returns ( .gnsi.authz.v1.ProbeResponse );
+
+Request metadata to send:
+password: cisco123!
+username: cisco
+
+Response headers received:
+content-type: application/grpc
+
+Estimated response size: 7 bytes
+
+Response contents:
+{
+  "action": "ACTION_DENY",
+  "version": "1.0"
+}
+
+Response trailers received:
+(empty)
+Sent 1 request and received 1 response
+```
+
+
