@@ -12,15 +12,15 @@ author: Rahul Sharma
 
  1. <b>Authentication:</b> Getting access to the system.<br>
  2. <b>Authorization:</b> Assigning authenticated user/group privileges.<br>
- 3. ><b>Accounting:</b> Logging events,actions, or data.
+ 3. <b>Accounting:</b> Logging events,actions, or data.
 
 It is important to note the order of AAA. 
   
 # Authorization
 	
 gNSI offers authorization through two protocols, each operating at different levels:<br>
-	<p>1. gRPC based <b>service level</b> using <b>authz</b>.<br></p>
-    <p>2. <b>xpath level</b> using <b>pathz</b>. </p>
+	1. gRPC based <b>service level</b> using <b>authz</b>.<br>
+    2. <b>xpath level</b> using <b>pathz</b>.
     
 ## authz
 
@@ -33,7 +33,7 @@ User Eric, gRPC = gNMI, rpc = Subscribe() --> Allow
 User Cisco, gRPC = all, rpc = all --> Allow
 User Mike, gRPC = gNOI, rpc = Verify() --> Deny
 ```
-<p align="justify">To implement user access control at the RPC level, a policy known as the 'Service Authorization Policy' must be defined. Following is a sample policy that implements authorization rules as per the example above.</p> 
+<p align="justify">To implement user access control at the RPC level, a policy known as the <b>'Service Authorization Policy'</b> must be defined. Following is a sample policy that implements authorization rules as per the example above:</p> 
 ```
 {
     "name": "Manage RPC level access for users Rahul, Eric, cisco and Mike",
@@ -108,10 +108,9 @@ User Mike, gRPC = gNOI, rpc = Verify() --> Deny
 
 <b> 1. XR CLI </b>
 
-Below are the steps to utilize authz using XR CLI.<br>
+Below are the steps to utilize authz using XR CLI:<br>
 
-
-<p align="justify"><u>Step1:</u> Create a service authorization policy. It is a JSON file which can either be copied from a server, or directly produced on the router itself. In this case, a file named authz_policy.json has been created in the /misc/scratch directory. The file content mirrors the sample policy outlined above.</p>
+<p align="justify"><u>Step1:</u> Create a service authorization policy. It is a JSON file which can either be copied from a server, or directly produced on the router itself. In this case, a file named authz_policy.json has been created in the /misc/scratch directory. The file content mirrors the sample policy outlined above:</p>
 
 ```
 RP/0/RP0/CPU0:cannonball#bash
@@ -189,7 +188,7 @@ Successfully loaded policy
 <u>Step 3:</u> Check current service authorization policy:
 
 ```
-		RP/0/RP0/CPU0:cannonball#show gnsi service authorization policy
+RP/0/RP0/CPU0:cannonball#show gnsi service authorization policy
 Mon Apr 15 20:46:13.332 UTC
 {
     "version": "1.0",
@@ -246,10 +245,9 @@ Error: one or more requests failed
 ```
 <p align="justify">This is an expected behavior, as the user Rahul is only authorized for the RPC Get(). Similar tests can be conducted for other users.</p>
 
-<b> 2. gRPCurl </b>
+<b> 2. gNSI client - gRPCurl </b>
 
-grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click 
-> [here](https://github.com/fullstorydev/grpcurl).
+grpcurl is a command-line tool for interacting with gRPC servers, essentially a curl for gRPC. To learn more, click [here](https://github.com/fullstorydev/grpcurl).
   
 Following are the steps to use this to interact with gRPC server on the router.
 <br>
@@ -258,8 +256,8 @@ Following are the steps to use this to interact with gRPC server on the router.
 ```
 git clone https://github.com/openconfig/gnsi.git
 ```
-<p align="justify"><u>Step 2.</u>  Install grpcurl using one of the method mentioned 
-here:https://github.com/fullstorydev/grpcurl. Here, we have used brew to install grpcurl using the following command:</p>
+<u>Step 2.</u>  Install grpcurl using one of the method mentioned 
+[here](https://github.com/fullstorydev/grpcurl). Here, we have used brew to install grpcurl using the following command:
 
 ```
 brew install grpcurl
@@ -272,7 +270,7 @@ cd gnsi/authz
 	
 <u>Step 4.</u> Use gNSI.authz RPCs to manage authorization on the router.
 
-A. Rotate() RPC - This RPC creates a new policy, or changes the existing policy. Following is the command to create a policy same as mentioned above.
+A.<u> Rotate() RPC</u> - This RPC creates a new policy, or changes the existing policy. Following is the command to create a policy same as mentioned above.
 
 ```
 ➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{
@@ -357,7 +355,7 @@ Response trailers received:
 Sent 2 requests and received 2 responses
 ```
 
-B. Get() RPC - To get current policy.
+B. <u>Get() RPC</u> - To get current policy.
 ```
 ➜  authz git:(main) ✗ grpcurl  -vv -plaintext -import-path ../authz -proto authz.proto  -H 
 username:cisco -H password:cisco123! 172.20.163.79:57400  gnsi.authz.v1.Authz.Get
@@ -405,7 +403,7 @@ Response trailers received:
 Sent 0 requests and received 1 response
 ```
 
-<p align="justify">C. Probe() RPC - To check if a specific user is authorized to use a particular RPC according to  the current/candidate policy. In this case, user Rahul is being probed for both, Get() and Capabilities() RPCs.</p>
+<p align="justify">C. <u>Probe() RPC</u> - To check if a specific user is authorized to use a particular RPC according to  the current/candidate policy. In this case, user Rahul is being probed for both, Get() and Capabilities() RPCs.</p>
 
 ```
 ➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{"user":"Rahul","rpc":"/gnmi.gNMI/Get"}' -
