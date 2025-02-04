@@ -257,20 +257,20 @@ Following are the steps to use this to interact with gRPC server on the router.
 git clone https://github.com/openconfig/gnsi.git
 ```
 <u>Step 2.</u>  Install grpcurl using one of the method mentioned 
-[here](https://github.com/fullstorydev/grpcurl). Here, we have used brew to install grpcurl using the following command:
+[here](https://github.com/fullstorydev/grpcurl). In this case, brew is used to install grpcurl using the following command:
 
 ```
 brew install grpcurl
 ```
 
-<u>Step 3.</u>  Change the working directory to gnsi/authz.
+<u>Step 3.</u>  Change the working directory to gnsi/authz:
 ```			
 cd gnsi/authz
 ```
 	
-<u>Step 4.</u> Use gNSI.authz RPCs to manage authorization on the router.
+<u>Step 4.</u> Use gNSI.authz RPCs to manage authorization on the router:
 
-A.<u> Rotate() RPC</u> - This RPC creates a new policy, or changes the existing policy. Following is the command to create a policy same as mentioned above.
+A. <u>Rotate() RPC</u> - This RPC creates a new policy, or changes the existing policy. Following is the command to create a policy same as mentioned above:
 
 ```
 ➜  authz git:(main) ✗ grpcurl  -vv -plaintext -d '{
