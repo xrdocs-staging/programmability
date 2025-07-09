@@ -26,7 +26,7 @@ It is important to note the order of AAA.
 
 # AuthZ - Authorization at gRPC Service RPC level
 
-<p align="justify">The gRPC suite supports various services including gNMI, gNOI, and gNSI, each consisting of multiple Remote Procedure Calls (RPCs) such as Get(), Set(), Subscribe(), and Rotate(). With Authorization (AuthZ), network devices can be configured to restrict or allow user-level access to specific RPCs within these services.</p>
+<p align="justify">The gRPC suite comprises of various services including gNMI, gNOI, and gNSI, each consisting of multiple Remote Procedure Calls (RPCs) such as Get(), Set(), Subscribe(), and Rotate(). With AuthZ, network devices can be configured to restrict or allow user-level access to specific RPCs within these services.</p>
 
 ## Use Case Example
 
@@ -37,7 +37,7 @@ It is important to note the order of AAA.
 | Cisco  | All          | All         | Allow  |
 | Mike   | gNOI         | Verify()    | Deny   |
 
-<p align="justify">To implement such controls, a Service Authorization Policy must be defined using a JSON-formatted Role-Based Access Control (RBAC) schema, which contains allow and deny rules mapping user principals to gRPC services and RPCs.</p>
+<p align="justify">To implement such controls, a <b>Service Authorization Policy</b> must be defined using a JSON-formatted Role-Based Access Control (RBAC) schema, which contains 'allow' and 'deny' rules mapping Principals to gRPC Services and RPCs.</p>
 
 ## Sample Authorization Policy
 
@@ -112,6 +112,8 @@ Once the policy is onboarded, it can be installed using the following CLI:
 RP/0/RP0/CPU0:ios# gnsi load service authorization policy <path-to-policy>
 ```
 
+The policy can also be installed using Rotate () RPC which is discussed later in this blog.
+
 ### Validation During Installation
 
 * JSON schema conformance
@@ -133,15 +135,15 @@ This RPC changes the existing policy on the system, with each policy identified 
 * performs an optional test and validation, 
 * and finalizes the rotation by sending a FinalizeRequest.
 
-<p align="justify">Before final commit, one or more probe requests could be made to validate the ‘candidate’ policy.
+Before final commit, one or more probe requests could be made to validate the ‘candidate’ policy.
 
 After receiving the ‘Finalize Request’, system will keep a backup of the current policy until ‘Finalize Request’ is done.
 
-This is an exclusive RPC, meaning only one Rotate () RPC session can be active at a time. The request for second session is denied until first one continues.
+> NOTE: This is an exclusive RPC, meaning only one Rotate () RPC session can be active at a time. The request for second session is denied until first one continues.
 
 The new policy changes don’t affect active gRPC sessions; it only impacts new sessions coming into the device.
 
-NOTE: Existing sessions created by the users who had privileges before the Rotation will continue to be active even if the new Policy removes those privileges. There will not be scope for Privilege escalation attacks as the Set RPC will try to establish a new session and will be allowed access with the new policies.</p>
+> NOTE: Existing sessions created by the users who had privileges before the Rotation will continue to be active even if the new Policy removes those privileges. There will not be scope for Privilege escalation attacks as the Set RPC will try to establish a new session and will be allowed access with the new policies.
 
 Following is a sample 'gRPCurl' command to use this RPC:
 
@@ -294,7 +296,7 @@ Sent 1 request and received 1 response
 ```
 ### 3. Get () RPC
 
-Retreives the current authorization policy,including its metadata (version and timestamp).
+Retreives the current authorization policy, including its metadata (version and timestamp).
 
 ```
 ➜  authz git:(main) ✗ grpcurl  -vv -plaintext -import-path ../authz -proto authz.proto  -H 
