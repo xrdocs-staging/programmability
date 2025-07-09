@@ -1,7 +1,7 @@
 ---
 published: true
 date: '2024-03-05 13:13 -0500'
-title: AuthZ - gRPC based authorization
+title: AuthZ - gRPC Service-level Authorization
 position: hidden
 author: Rahul Sharma
 ---
