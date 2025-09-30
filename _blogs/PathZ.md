@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 date: '2025-09-30 12:24 -0400'
 title: Securing gNMI with PathZ
 position: hidden
