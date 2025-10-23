@@ -283,8 +283,8 @@ tags:
 
 
 prose:
-  siteurl: 'https://xrdocs.github.io/software-management/'
-  relativeLinks: 'https://xrdocs.github.io/software-management/links.jsonp'
+  siteurl: 'https://d101lr0mb7xh5s.cloudfront.net/programmability/'
+  relativeLinks: 'https://d101lr0mb7xh5s.cloudfront.net/programmability//links.jsonp'
   media: 'images'
   ignore:
     - index.md
