@@ -40,7 +40,7 @@ In today's article, we will use the Segment Routing network topology, based on I
 The topology in the above repo has been slightly changed to adapt to our use case. For instance, we are using proper IOS XRd routers as source and destination (not linux hosts), so we can benefit from all IOS XR networking features.
 You can find those changes (each node `startup configuration` and `docker-compose.xr.yaml`) [here](https://github.com/AntoineOrsoni/xrdocs-how-to-pyats/tree/master/5_config_builder/ios%20xrd).
 
-You can read more on XRDocs about what's IOS XRd and how to use it [here](https://xrdocs.io/virtual-routing/tutorials/).
+You can read more on XRDocs about what's IOS XRd and how to use it [here]({{site.url}}/virtual-routing/tutorials/).
 {: .notice--info}
 
 The topology will look like below. We will send traffic between a source and a destination and influence the traffic's path using Segment Routing Policies.
@@ -106,7 +106,7 @@ submodule Cisco-IOS-XR-ipv6-traceroute-act {
   belongs-to Cisco-IOS-XR-traceroute-act {
 ```
 
-You can read how to use YANG Suite in [this article](https://xrdocs.io/programmability/tutorials/do-you-speak-yang/).
+You can read how to use YANG Suite in [this article]({{site.url}}/programmability/tutorials/do-you-speak-yang/).
 {: .notice--info}
 
 
@@ -114,7 +114,7 @@ You can read how to use YANG Suite in [this article](https://xrdocs.io/programma
 
 In order to ask your device what output you want and which filters you would like to apply, we need to build the appropriate RPC. 
 
-I have already covered how to add a new **YANG model repository** and how to create a **YANG set** in [this article](https://xrdocs.io/programmability/tutorials/do-you-speak-yang/). We will move directly to the specific actions in this article.
+I have already covered how to add a new **YANG model repository** and how to create a **YANG set** in [this article]({{site.url}}/programmability/tutorials/do-you-speak-yang/). We will move directly to the specific actions in this article.
 {: .notice--info}
 
 Here are the steps we need to take in order to build the RPC:

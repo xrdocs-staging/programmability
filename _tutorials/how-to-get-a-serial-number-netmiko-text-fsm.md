@@ -22,7 +22,7 @@ At first, the question sounded silly: you could just do `show inventory all` on 
 
 # Introduction
 
-In this second episode, we are going to use **Netmiko** and **TextFSM**. The logic will be very similar to what we saw on [episode 1](https://xrdocs.io/programmability/tutorials/how-to-get-a-serial-number-pyats/). Netmiko will be used to handle device connection and to interact with our device (i.e. connect to the device, send a `show command`, retrieve the `output`, disconnect from the device). Netmiko will retrieve our output as a very long string, without any parsing. It's our job to parse the output to extract the information we need. For this, we will leverage TextFSM.
+In this second episode, we are going to use **Netmiko** and **TextFSM**. The logic will be very similar to what we saw on [episode 1]({{site.url}}/programmability/tutorials/how-to-get-a-serial-number-pyats/). Netmiko will be used to handle device connection and to interact with our device (i.e. connect to the device, send a `show command`, retrieve the `output`, disconnect from the device). Netmiko will retrieve our output as a very long string, without any parsing. It's our job to parse the output to extract the information we need. For this, we will leverage TextFSM.
 
 The code for this series of posts will be published [here](https://github.com/AntoineOrsoni/how-to-get-serial-number/).
 {: .notice--info}
@@ -50,9 +50,9 @@ You’ve missed an episode? You would like to read more? Below the list of publi
 
 | Episode 	| URL                                                                                              	| What's covered                                        	|
 |---------	|--------------------------------------------------------------------------------------------------	|-------------------------------------------------------	|
-| **1 - pyATS**       	| [Link](https://xrdocs.io/programmability/tutorials/how-to-get-a-serial-number-pyats/){: .btn}  	|  Using pyATS to get a serial number on a given IOS XR device 	|
+| **1 - pyATS**       	| [Link]({{site.url}}/programmability/tutorials/how-to-get-a-serial-number-pyats/){: .btn}  	|  Using pyATS to get a serial number on a given IOS XR device 	|
 |-------------------------------------------------------	|
-| **2 - Netmiko and Text FSM**       	| [Link](https://xrdocs.io/programmability/tutorials/how-to-get-a-serial-number-netmiko-text-fsm/){: .btn}  	|  Using Netmiko and Text FSM to get a serial number on a given IOS XR device 	|
+| **2 - Netmiko and Text FSM**       	| [Link]({{site.url}}/programmability/tutorials/how-to-get-a-serial-number-netmiko-text-fsm/){: .btn}  	|  Using Netmiko and Text FSM to get a serial number on a given IOS XR device 	|
 
 # Using the Devnet sandbox
 
@@ -109,7 +109,7 @@ In a nutshell, we need to specify how to connect to our device:
 
 <script src="https://gist.github.com/AntoineOrsoni/c837b0cc0d49c5be0f18232689eedd3e.js"></script>
 
-Testbed definition has been covered in more details in [this post](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/).
+Testbed definition has been covered in more details in [this post]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/).
 {: .notice--info}
 
 ## Leveraging Netmiko to connect to the IOS XR Sandbox

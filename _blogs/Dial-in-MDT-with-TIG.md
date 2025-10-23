@@ -13,7 +13,7 @@ author: Rahul Sharma
 <br>
 <br>
 If well-versed in MDT and YANG models, please proceed with the steps to establish MDT. Otherwise, it is advisable to review the following article first.</p>
-> [Introduction to Model-Driven Telemetry](https://xrdocs.io/programmability/blogs/Model-Driven-Telemetry/)  
+> [Introduction to Model-Driven Telemetry]({{site.url}}/programmability/blogs/Model-Driven-Telemetry/)  
 
 # MDT Components
 

@@ -45,7 +45,7 @@ In today's article, we will use the Segment Routing network topology, based on I
 The topology in the above repo has been slightly changed to adapt to our use case. For instance, we are using proper IOS XRd routers as source and destination (not linux hosts), so we can benefit from all IOS XR networking features.
 You can find those changes (each node `startup configuration` and `docker-compose.xr.yaml`) [here](https://github.com/AntoineOrsoni/xrdocs-how-to-pyats/tree/master/5_config_builder/ios%20xrd).
 
-You can read more on XRDocs about what's IOS XRd and how to use it [here](https://xrdocs.io/virtual-routing/tutorials/).
+You can read more on XRDocs about what's IOS XRd and how to use it [here]({{site.url}}/virtual-routing/tutorials/).
 {: .notice--info}
 
 The topology will look like below. We will send traffic between a source and a destination and influence the traffic's path using Segment Routing Policies.

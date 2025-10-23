@@ -135,7 +135,7 @@ Enough talking, let's code!
 
 ![collecting_show_commands_2.jpeg]({{site.baseurl}}/images/collecting_show_commands_2.jpeg){: .align-center}
 
-**pyATS installation** has been covered in the [First episode](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/). Check it out to learn how to install pyATS.
+**pyATS installation** has been covered in the [First episode]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/). Check it out to learn how to install pyATS.
 
 Today's code will be available [here](https://github.com/AntoineOrsoni/pyats-collect-show).
 {: .notice--info}
@@ -215,7 +215,7 @@ What's interesting with Jinja2 is that it can have its **own logic such as condi
 
 Here, we are using Jinja2 to create a template for our pyATS testbed. You can find the pyATS testbed template in [templates/testbed.tpl](https://github.com/AntoineOrsoni/pyats-collect-show/blob/master/templates/testbed.tpl).
 
-The **testbed construction** has been covered in the [First episode](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how to build a testbed from scratch.
+The **testbed construction** has been covered in the [First episode]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how to build a testbed from scratch.
 {: .notice--info}
 
 The below outputs presents the Jinja2 logic used for our pyATS testbed. For brievity, we are **not** showing the full template file.
@@ -279,7 +279,7 @@ First, we need to connect to each device. In case we cannot connect to a device,
         <span class="k">continue</span>
 </pre></div>
 
-The **connect()** method has been covered in the [First episode](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how it works.
+The **connect()** method has been covered in the [First episode]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how it works.
 {: .notice--info}
 
 ### Collecting CLI output

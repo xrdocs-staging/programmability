@@ -78,11 +78,11 @@ There are two types of MDT with respect to the network device.
 <br>  
 <b>1. Dial-in:</b> When the gRPC channel is initiated by collector or when network device <b>‘gets in’</b> the gRPC channel request, it known as <b>Dial-in</b> MDT.</p>
 
-Interested in establishing Dial-in MDT? Click [here](https://xrdocs.io/programmability/blogs/Dial-in-MDT-with-TIG/).
+Interested in establishing Dial-in MDT? Click [here]({{site.url}}/programmability/blogs/Dial-in-MDT-with-TIG/).
 
 <p align="justify"><b>2. Dial-out:</b> When the gRPC channel is initiated by collector or when network-device <b>‘sends out’</b> the gRPC channel request, it is known as <b>Dial-out</b> MDT.</p>
   
-Interested in establishing Dial-out MDT? Click [here](https://xrdocs.io/programmability/blogs/Dial-out-MDT-with-TIG/).
+Interested in establishing Dial-out MDT? Click [here]({{site.url}}/programmability/blogs/Dial-out-MDT-with-TIG/).
 
 ![dial-in-dial-out.png]({{site.baseurl}}/images/dial-in-dial-out.png)
 
@@ -90,8 +90,8 @@ Interested in establishing Dial-out MDT? Click [here](https://xrdocs.io/programm
 
 <p align="justify">Familiarity with programmability basics is now established, paving the way to delve into the following articles with confidence:</p>
 
-> [Dial-out Model-Driven Telemetry with TIG Stack](https://xrdocs.io/programmability/blogs/Dial-out-MDT-with-TIG/)
+> [Dial-out Model-Driven Telemetry with TIG Stack]({{site.url}}/programmability/blogs/Dial-out-MDT-with-TIG/)
 <br>
 <br>
-> [Dial-in Model-Driven Telemetry with TIG Stack](https://xrdocs.io/programmability/blogs/Dial-in-MDT-with-TIG/)
+> [Dial-in Model-Driven Telemetry with TIG Stack]({{site.url}}/programmability/blogs/Dial-in-MDT-with-TIG/)
 

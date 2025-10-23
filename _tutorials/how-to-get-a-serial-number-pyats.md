@@ -26,7 +26,7 @@ pyATS is made of three main building blocks:
 - **XPRESSO**, the pyATS Web UI Dashboard.
 
 If you are not already familiar with pyATS and you want to know how to install it and how to use it, have a look at my pyATS series below.
-https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/
+{{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/
 {: .notice--info}
 
 The code for this series of posts will be published [here](https://github.com/AntoineOrsoni/how-to-get-serial-number/).
@@ -38,7 +38,7 @@ You’ve missed an episode? You would like to read more? Below the list of publi
 
 | Episode 	| URL                                                                                              	| What's covered                                        	|
 |---------	|--------------------------------------------------------------------------------------------------	|-------------------------------------------------------	|
-| **1 - pyATS**       	| [Link](https://xrdocs.io/programmability/tutorials/how-to-get-a-serial-number-pyats/){: .btn}  	|  Using pyATS to get a serial number on a given IOS XR device 	|
+| **1 - pyATS**       	| [Link]({{site.url}}/programmability/tutorials/how-to-get-a-serial-number-pyats/){: .btn}  	|  Using pyATS to get a serial number on a given IOS XR device 	|
 
 # Using the Devnet sandbox
 
@@ -91,7 +91,7 @@ In a nutshell, we need to specify how to connect to our device:
 
 <script src="https://gist.github.com/AntoineOrsoni/c837b0cc0d49c5be0f18232689eedd3e.js"></script>
 
-Testbed definition has been covered in more details in [this post](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/).
+Testbed definition has been covered in more details in [this post]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/).
 {: .notice--info}
 
 ## Leveraging pyATS parsers to get a Python dictionary
@@ -100,7 +100,7 @@ The power of the **pyATS libraries**: to be able to convert a **raw output** (wh
 
 <script src="https://gist.github.com/AntoineOrsoni/dc87b1259a5f811e4a9394d9aa4481ae.js"></script>
 
-To better understand the difference between a raw output and a parserd output, you can refer to [this article](https://xrdocs.io/programmability/tutorials/pyats-series-parsing-like-a-pro/).
+To better understand the difference between a raw output and a parserd output, you can refer to [this article]({{site.url}}/programmability/tutorials/pyats-series-parsing-like-a-pro/).
 {: .notice--info}
 
 ## Using Python to get the value of a specific key

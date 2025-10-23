@@ -149,7 +149,7 @@ Enough talking, let's code!
 
 ![i was born ready2.jpeg]({{site.baseurl}}/images/i was born ready2.jpeg){: .align-center}
 
-**pyATS installation** has been covered in the [First episode](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/). Check it out to learn how to install pyATS.
+**pyATS installation** has been covered in the [First episode]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/). Check it out to learn how to install pyATS.
 
 ## Parsing a CLI output from a device 
 
@@ -221,7 +221,7 @@ You can find the complete documentation on how to build a testbed [here](https:/
 The `testbed.yaml` file is available [here](https://github.com/AntoineOrsoni/xrdocs-how-to-pyats/blob/master/2_multi_os/).
 {: .notice--info}
 
-The **testbed construction** has been covered in the [First episode](https://xrdocs.io/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how to build a testbed from scratch
+The **testbed construction** has been covered in the [First episode]({{site.url}}/programmability/tutorials/pyats-series-install-and-use-pyats/). Have a look to understand how to build a testbed from scratch
 
 ## Why do models exist?
 

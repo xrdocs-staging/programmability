@@ -28,7 +28,7 @@ This article focuses on establishing Dial-out Model-Driven Telemetry (MDT) using
 <br>
 <br>  
 If well-versed in MDT and YANG models, please proceed with the steps to establish MDT. Otherwise, it is advisable to review the following article first.</p>
-> [Introduction to Model-Driven Telemetry](https://xrdocs.io/programmability/blogs/Model-Driven-Telemetry/)  
+> [Introduction to Model-Driven Telemetry]({{site.url}}/programmability/blogs/Model-Driven-Telemetry/)  
 
 # MDT Components
 
@@ -179,7 +179,7 @@ RP/0/RP0/CPU0:ios(config-model-driven-snsr-grp)# commit
 
 <p align="justify">Interested in discovering the accurate sensor path for a desired metric to stream? Delve into the following article, which elucidates the process of locating a sensor-path for a CLI.</p>
 
-> [CLI to sensor-path](https://xrdocs.io/programmability/blogs/CLI-to-sensor-path/)
+> [CLI to sensor-path]({{site.url}}/programmability/blogs/CLI-to-sensor-path/)
 
 <b>Step3:</b> Create a <b>subscription:</b> This maps a destination-group to a sensor-group. 
 
